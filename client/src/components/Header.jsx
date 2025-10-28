@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 function Header({additionalButtons=[]}) {
     return (
         <>
-            <header className="fixed-top" style={{ 'border-bottom': "2px solid black" }}>
+            <header className="fixed-top" style={{ 'border-bottom': "2px solid black" , 'background-color': 'white' }}>
                 <h1 className="d-flex justify-content-between align-items-center my-3 mx-5">
                     <a href="/" className="text-reset text-decoration-none"><span className="ml-5">Blog.site</span></a>
                     <span>
