@@ -106,14 +106,14 @@ function Signup() {
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Control type='text' placeholder='password' onChange={(e) => setPassword(e.target.value)}>
+                                <Form.Control type='password' placeholder='password' onChange={(e) => setPassword(e.target.value)}>
                                 </Form.Control>
                                 <Form.Text className={passwordErrorClasses}>
                                     Userid must contain an alphanumeric character
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Control type='text' placeholder='retype password' onChange={(e) => setPasswordConfirm(e.target.value)}>
+                                <Form.Control type='password' placeholder='retype password' onChange={(e) => setPasswordConfirm(e.target.value)}>
                                 </Form.Control>
                                 <Form.Text className={passwordConfirmErrorClasses}>
                                     Userid must contain an alphanumeric character
