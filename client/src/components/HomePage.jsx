@@ -70,6 +70,7 @@ function HomePage() {
                             <option value="Health">Health</option>
                             <option value="Cooking">Cooking</option>
                         </Form.Select>
+                        <Form.Text className='text-danger'>error</Form.Text>
                     </Form.Group>
                     <span className='d-flex justify-content-end'>
                         <Button type='submit'>Submit</Button>

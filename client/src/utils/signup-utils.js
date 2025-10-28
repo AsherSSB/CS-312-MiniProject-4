@@ -35,7 +35,7 @@ function containsSpecialCharacter(string) {
 }
 
 function withinVarchar255(string) {
-    return string.length <= 255;
+    return string.length <= 255 && string.length > 2;
 }
 
 export { validateUserId, validateUsername, validatePassword }

@@ -91,36 +91,30 @@ function Signup() {
                     <Card className="w-50 my-5">
                         <Card.Header>Sign up for Blog.site</Card.Header>
                         <Card.Body>
-                            <Form.Group>
-                                <Form.Control type='text' placeholder='userid' onChange={(e) => setUserId(e.target.value)}>
-                                </Form.Control>
+                            <Form.Group className='my-4'>
+                                <Form.Control type='text' placeholder='userid' onChange={(e) => setUserId(e.target.value)} />
                                 <Form.Text className={useridErrorClasses}>
                                     Userid must contain an alphanumeric character
                                 </Form.Text>
                             </Form.Group>
-                            <Form.Group>
-                                <Form.Control type='text' placeholder='username' onChange={(e) => setUsername(e.target.value)}>
-                                </Form.Control>
+                            <Form.Group className='my-4'>
+                                <Form.Control type='text' placeholder='username' onChange={(e) => setUsername(e.target.value)} />
                                 <Form.Text className={usernameErrorClasses}>
-                                    Userid must contain an alphanumeric character
+                                    Username must be 3 or more letters and contain no special characters
                                 </Form.Text>
                             </Form.Group>
-                            <Form.Group>
-                                <Form.Control type='password' placeholder='password' onChange={(e) => setPassword(e.target.value)}>
-                                </Form.Control>
+                            <Form.Group className='my-4'>
+                                <Form.Control type='password' placeholder='password' onChange={(e) => setPassword(e.target.value)} />
                                 <Form.Text className={passwordErrorClasses}>
-                                    Userid must contain an alphanumeric character
+                                    Password must contain 8 characters, at least 1 uppercase, lowercase, and special character
                                 </Form.Text>
                             </Form.Group>
-                            <Form.Group>
-                                <Form.Control type='password' placeholder='retype password' onChange={(e) => setPasswordConfirm(e.target.value)}>
-                                </Form.Control>
-                                <Form.Text className={passwordConfirmErrorClasses}>
-                                    Userid must contain an alphanumeric character
-                                </Form.Text>
+                            <Form.Group className='my-4'>
+                                <Form.Control type='password' placeholder='retype password' onChange={(e) => setPasswordConfirm(e.target.value)} />
+                                <Form.Text className={passwordConfirmErrorClasses}>Passwords must match</Form.Text>
                             </Form.Group>
                         </Card.Body>
-                        <Card.Footer>
+                        <Card.Footer className='d-flex justify-content-end'>
                             <Button type='submit' onClick={submitSignup}>Submit</Button>
                         </Card.Footer>
                     </Card>
