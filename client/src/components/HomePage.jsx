@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { NewBlogButton, NewBlogModal } from "./NewBlogButton"; 
 import { Header } from "./Header";
 import { DeleteBlogButton } from './DeleteBlogButton';
-import { EditBlogButton, EditBlogModal } from './EditBlogButton';
-import { Container, Row, Card} from 'react-bootstrap'
+import { EditBlogModal } from './EditBlogButton';
+import { Container, Row, Card, Button } from 'react-bootstrap'
 
 async function getBlogs() {
     const data = await fetch('/blogs')
@@ -14,8 +14,6 @@ async function getBlogs() {
         return response.json();
     })
     .then((blogs) => {
-        console.debug('buh');
-        console.debug(blogs);
         return blogs
     })
     .catch((error) => {
@@ -32,17 +30,35 @@ async function getBlogs() {
 }
 
 function HomePage() {
-    const [modalDisplay, setModalDisplay] = useState(false);
+    const userId = JSON.parse(localStorage.getItem('userId')).userId;
+
+    const [newBlogModalDisplay, setNewBlogModalDisplay] = useState(false);
+    const [editBlogModalDisplay, setEditBlogModalDisplay] = useState(false);
     const [blogs, setBlogs] = useState([]);
+    const [editingBlog, setEditingBlog] = useState(-1);
 
     useEffect(() => {
         getBlogs().then(setBlogs);
     }, []);
 
+    const openEditBlogModal = ({ blogId }) => {
+        console.log('clicked!', blogId);
+        setEditingBlog(blogId);
+        setEditBlogModalDisplay(true);
+    }
+
+    const EditBlogButton = ({ blogId }) => {
+        console.debug('init blog edit but id', blogId);
+        return (
+            <Button variant='secondary' onClick={() => openEditBlogModal({blogId})}>Edit</Button>
+        );
+    }
+
     return (
         <>
-            <Header additionalButtons={[<NewBlogButton displaySetter={setModalDisplay}/>]} />
-            <NewBlogModal display={modalDisplay} displaySetter={setModalDisplay}/>
+            <Header additionalButtons={[<NewBlogButton displaySetter={setNewBlogModalDisplay}/>]} />
+            <NewBlogModal display={newBlogModalDisplay} displaySetter={setNewBlogModalDisplay}/>
+            <EditBlogModal blogId={editingBlog} display={editBlogModalDisplay} displaySetter={setEditBlogModalDisplay}/>
 
             <Container>
                 {blogs.map((blog, _) => (
@@ -51,18 +67,23 @@ function HomePage() {
                         <Card className='px-0'>
                             <Card.Header className='d-flex justify-content-between'>
                                 <span>
-                                    <span class="rounded-pill bg-primary px-2 py-1 me-3">{blog.category}</span>
+                                    <span className="rounded-pill bg-primary px-2 py-1 me-3">{blog.category}</span>
                                     {blog.title}
                                 </span>
-                                <span class="blog-author">Posted By: {blog.username}</span>
+                                <span className="blog-author">Posted By: {blog.username}</span>
                             </Card.Header>
                             <Card.Body className='my-3'>
                                 <Card.Text>{blog.body}</Card.Text>
                             </Card.Body>
-                            <Card.Footer className='d-flex justify-content-between'>
-                                <span class="blog-time-container">Posted at: <span class="blog-time">{blog.date_created}</span></span>
-                                <span class="blog-controls">
+                            <Card.Footer className='d-flex align-items-center justify-content-between'>
+                                <span className="blog-time-container">Posted at: <span className="blog-time">{blog.date_created}</span></span>
+                             
+                            {blog.creator_user_id === userId ? (
+                                <span>
+                                    <span className='mx-2'><DeleteBlogButton blogId={blog.blog_id} /></span>
+                                    <EditBlogButton blogId={blog.blog_id} />
                                 </span>
+                            ): null}
                             </Card.Footer>
                         </Card>
                     </Row>

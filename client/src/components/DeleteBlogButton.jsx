@@ -26,7 +26,7 @@ function deleteBlog(blogId) {
 
 function DeleteBlogButton({blogId}) {
     return (
-        <Button onClick={() => deleteBlog(blogId)}></Button>
+        <Button variant='danger' onClick={() => deleteBlog(blogId)}>Delete</Button>
     );
 }
 
