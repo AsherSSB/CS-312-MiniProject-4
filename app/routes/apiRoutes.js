@@ -91,6 +91,8 @@ router.delete('/blog/:id', async (req, res) => {
 
     const blogAuthor = await DB.getBlogAuthorId(blogId);
 
+    console.debug('COOKIE ', req.cookies.userId);
+
     if (req.cookies.userId !== blogAuthor) {
         return res.status(403).json({message: 'You are not the author of this post'});
     }

@@ -30,6 +30,8 @@ function NewBlogModal({display, displaySetter}) {
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP Error: ${response.status}`);
+            } else {
+                window.location.reload();
             }
         })
         .catch(error => {
@@ -39,44 +41,44 @@ function NewBlogModal({display, displaySetter}) {
 
     return (
         <Modal show={display} onHide={() => displaySetter(false)}>
-            <Modal.Header className='justify-content-between'>
-                <h4>New Blog</h4>
-                <Button variant="danger" onClick={() => displaySetter(false)}>Close</Button>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={(e) => submitForm(e)}>
-                    <Form.Group>
-                        <Form.Label>Author Name</Form.Label>
-                        <Form.Control type="text" onChange={(e) => setAuthor(e.target.value)} required></Form.Control>
-                    </Form.Group>
+            <Form onSubmit={submitForm}>
+                <Modal.Header className='justify-content-between'>
+                    <h4>New Blog</h4>
+                    <Button variant="danger" type='button' onClick={() => displaySetter(false)}>Close</Button>
+                </Modal.Header>
+                <Modal.Body>
+                        <Form.Group>
+                            <Form.Label>Author Name</Form.Label>
+                            <Form.Control type="text" onChange={(e) => setAuthor(e.target.value)} required></Form.Control>
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Blog Title</Form.Label>
-                        <Form.Control type="text" onChange={(e) => setTitle(e.target.value)} required></Form.Control>
-                    </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Blog Title</Form.Label>
+                            <Form.Control type="text" onChange={(e) => setTitle(e.target.value)} required></Form.Control>
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Content</Form.Label>
-                        <Form.Control type="text" onChange={(e) => setContent(e.target.value)} required></Form.Control>
-                    </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Content</Form.Label>
+                            <Form.Control type="text" onChange={(e) => setContent(e.target.value)} required></Form.Control>
+                        </Form.Group>
 
-                    <Form.Group>
-                        <Form.Label>Category</Form.Label>
-                        <Form.Select required onChange={(e) => setCategory(e.target.value)}>
-                            <option>Select Category</option>
-                            <option value="Tech">Tech</option>
-                            <option value="Lifestyle">Lifestyle</option>
-                            <option value="Health">Health</option>
-                            <option value="Cooking">Cooking</option>
-                        </Form.Select>
-                    </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <span className='d-flex justify-content-end'>
-                    <Button type='submit'>Submit</Button>
-                </span>
-            </Modal.Footer>
+                        <Form.Group>
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select required onChange={(e) => setCategory(e.target.value)}>
+                                <option>Select Category</option>
+                                <option value="Tech">Tech</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                                <option value="Health">Health</option>
+                                <option value="Cooking">Cooking</option>
+                            </Form.Select>
+                        </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                    <span className='d-flex justify-content-end'>
+                        <Button type='submit'>Submit</Button>
+                    </span>
+                </Modal.Footer>
+            </Form>
         </Modal>
     )
 }
